@@ -5,6 +5,8 @@ String input;
 Client c;
 Client clients[] = new Client[0];
 String IP;
+String Navn;
+String[] cData = new String[]
 
 
 void setup() {
@@ -19,6 +21,7 @@ void serverEvent(Server someServer, Client someClient) {
   clients = (Client[]) expand(clients, clients.length+1);
   clients[clients.length-1] = someClient;
   clients[clients.length-1].write("CONNECTET");
+  bingoPlade();
 }
 
 void draw() {
@@ -31,4 +34,12 @@ void draw() {
 void stringInput() {
   input = clients[clients.length-1].readString();
   print(input + " ");
+  
 }
+
+void stringToArray() {
+  cData = split(input, ",");
+  String[] temp = subset(cData, 1);
+  int[] cNum = int(temp);
+  int[] cData[0] = new int[];
+} //<>//
