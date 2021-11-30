@@ -29,6 +29,6 @@ void draw() {
 }
 
 void stringInput() {
-    input = clients[clients.length-1].readString();
+  input = clients[clients.length-1].readString();
   print(input + " ");
 }
