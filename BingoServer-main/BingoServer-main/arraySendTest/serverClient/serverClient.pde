@@ -10,17 +10,14 @@ void setup() {
   c = new Client(this, "10.130.153.145", 12345);
 }
 
-void draw(){
-if (c.available() > 0) {
-  input = c.readString();
-  println(input);
-}
+void draw() {
+  if (c.available() > 0) {
+    input = c.readString();
+    println(input);
+    SendBingoplade();
+  }
 }
 
-void sendArray() {
-  for (int i = 0; i < 9; i++) {
-    for (int n = 0; n < 3; n++) {
-      c.write(numbers[n][i]);
-    }
-  }
+void SendBingoplade(){
+  c.write("1,2,3,11,12,13,21,22,23,31,32,33,41,42,43,51,52,53,61,62,63,71,72,73,81,82,83");
 }
