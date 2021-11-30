@@ -19,7 +19,6 @@ void serverEvent(Server someServer, Client someClient) {
   clients = (Client[]) expand(clients, clients.length+1);
   clients[clients.length-1] = someClient;
   clients[clients.length-1].write("CONNECTET");
-  col = 0; row = 0;
 }
 
 void draw() {
@@ -30,6 +29,6 @@ void draw() {
 }
 
 void stringInput() {
-    input = clients[clients.length-1].read();
+    input = clients[clients.length-1].readString();
   print(input + " ");
 }
