@@ -1,13 +1,10 @@
 import processing.net.*; //<>//
 
 Server s;
-int input;
+String input;
 Client c;
 Client clients[] = new Client[0];
 String IP;
-
-int[][] plate = new int [3][9];
-int col, row;
 
 
 void setup() {
@@ -28,22 +25,11 @@ void serverEvent(Server someServer, Client someClient) {
 void draw() {
   c = s.available();
   if (c != null) {
-    arrayInput();
+    stringInput();
   }
 }
 
-void arrayInput() {
-  if (col < 9) {
+void stringInput() {
     input = clients[clients.length-1].read();
-    plate[row][col] = input;
-    row++;
-    if (row == 3) {
-      row = 0;
-      col++;
-    }
-  }
   print(input + " ");
-  if (col == 9 && row == 0) {
-    clients[clients.length-1].write("ARRAY MODTAGET "); 
-  }
 }
