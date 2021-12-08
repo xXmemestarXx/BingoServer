@@ -9,7 +9,6 @@ Client c;
 Client clients[] = new Client[0]; 
 String IP; 
 int cNum = 0;
-String input;
 
 
 void setup() {
@@ -30,7 +29,7 @@ void draw() {
   c = s.available();
   if (c != null) {
     stringInput();
-    stringtoArray();
+    //stringtoArray();
   }
 }
 
