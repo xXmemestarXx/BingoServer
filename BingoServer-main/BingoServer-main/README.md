@@ -5,5 +5,4 @@ Development af:
 Mathias B.
 Kristoffer N.
 Jeppe R.
-Gregor E.
-Søren B.
+
