@@ -1,12 +1,15 @@
+//match() kan bruges som funktion til at sammenligne 2 strings, så lad os beholde den i string form i stedet for at konvetere den til arrayS.
+
 import processing.net.*;
 
 CBP[] clientData = new CBP[30];
 Server s;
 String input;
 Client c;
-Client clients[] = new Client[0];
-String IP;
+Client clients[] = new Client[0]; 
+String IP; 
 int cNum = 0;
+String input;
 
 
 void setup() {
@@ -27,6 +30,7 @@ void draw() {
   c = s.available();
   if (c != null) {
     stringInput();
+    stringtoArray();
   }
 }
 
@@ -36,3 +40,9 @@ void stringInput() {
   clientData[cNum] = new CBP(input);
   cNum++;
 }
+
+//void stringtoArray(String input){
+  //input[][] parsedArray = split(input, ",");
+  //input[][] = new int[3][9]
+  //print(parsedArray);
+//}
