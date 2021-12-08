@@ -26,17 +26,17 @@ void serverEvent(Server someServer, Client someClient) {
     clients[clients.length - 1].write("CONNECTED");
 }
 
-void draw() { //<>//
+void draw() {
     c = s.available();
     if(c != null) {
         stringInput();
 }
     if (keyPressed) {
       if(key == ' '){
-        checkArrays();  //<>//
+        checkArrays(); //<>//
         print(num);
       } 
-  }
+    }
 }
 
 void stringInput() {
@@ -46,10 +46,9 @@ void stringInput() {
     cNum++;
 }
 
-void checkArrays() { //<>//
-    drawnNum = expand(drawnNum, drawnNum.length + 1);   //<>//
+void checkArrays() {
+    drawnNum = expand(drawnNum, drawnNum.length + 1);  
     randomNum();
-    print(drawnNum.length);
 }
 
 void randomNum() {
@@ -58,17 +57,13 @@ void randomNum() {
           boolean boolean2 = true;
         num = int(random(1, 91)); 
         while(boolean2 == true) {
-            while(i<drawnNum.length-1){
             if (drawnNum[i] == num) {
                 boolean2 = false;
-                i = drawnNum.length;
             }
             if(i == drawnNum.length-1){
               boolean1 = true;
-              i = drawnNum.length;
             }
-            i++;
-            }
+        i++;
     }
     }
 }
