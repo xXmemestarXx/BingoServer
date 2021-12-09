@@ -33,7 +33,7 @@ void draw() {
   }
   if (keyPressed) {
     if (key == ' ') {
-      if (drawnNum.length < 90) {
+      if (drawnNum.length < 91) {
         println("----------------");
         checkArrays();
       }
@@ -73,7 +73,7 @@ void randomNum() {
         println("goodNum");
       }
       i++;
-      println("this is i:" + i);
+      println("i = " + i);
     }
   }
 }
