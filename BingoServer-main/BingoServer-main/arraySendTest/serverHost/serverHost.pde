@@ -66,6 +66,7 @@ void randomNum() {
             if(i == drawnNum.length-1){
               boolean1 = true;
               i = drawnNum.length;
+              boolean1 = false;
             }
             i++;
             }
