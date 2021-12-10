@@ -33,7 +33,7 @@ void draw() {
   }
   if (keyPressed) {
     if (key == ' ') {
-      if (drawnNum.length < 91) {
+      if (drawnNum.length < 90) {
         println("----------------");
         checkArrays();
       }
@@ -51,29 +51,23 @@ void stringInput() {
 void checkArrays() {
   drawnNum = expand(drawnNum, drawnNum.length + 1);  
   randomNum();
-  println("good num = " + num);
+  println(drawnNum.length + " : good num = " + num);
   goodNum = false;
 }
 
 void randomNum() {
   while (goodNum == false) {
     int i = 0;
-    println("i = " + i);
     num = int(random(1, 91));
-    println("num = " + num);
     while (i <= drawnNum.length-1) {
-      println("testNum");
       if (num == drawnNum[i]) {
-        i = drawnNum.length + 1;
-        println("badNum");
+        break;
       } else if (i == drawnNum.length-1 && num != drawnNum[drawnNum.length-1]) {
         drawnNum[drawnNum.length-1] = num;
         goodNum = true;
-        i = drawnNum.length + 1;
-        println("goodNum");
+        break;
       }
       i++;
-      println("i = " + i);
     }
   }
 }
