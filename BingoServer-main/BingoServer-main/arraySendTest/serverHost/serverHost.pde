@@ -1,12 +1,11 @@
-import processing.net.*; //<>// //<>// //<>// //<>// //<>//
+import processing.net.*; //<>// //<>// //<>// //<>// //<>// //<>//
 
-CBP[] clientData = new CBP[30];
+CBP[] clientData = new CBP[0];
 Server s;
 String input;
 Client c;
 Client clients[] = new Client[0]; 
 String IP; 
-int cNum = 0;
 int[] drawnNum = new int[0];
 boolean keyP = false;
 int num;
@@ -35,7 +34,7 @@ void draw() {
     if (key == ' ') {
       if (drawnNum.length < 90) {
         println("----------------");
-        checkArrays();
+        drawNum();
       }
     }
   }
@@ -44,18 +43,23 @@ void draw() {
 void stringInput() {
   input = clients[clients.length - 1].readString();
   print(input + " ");
-  clientData[cNum] = new CBP(input);
-  cNum++;
+  clientData = (CBP[]) expand(clientData, clientData.length + 1);
+  clientData[clientData.length - 1] = new CBP(input);
 }
 
-void checkArrays() {
-  drawnNum = expand(drawnNum, drawnNum.length + 1);  
+void drawNum() {
   randomNum();
   println(drawnNum.length + " : good num = " + num);
   goodNum = false;
+  checkMatch(num);
+  println("Cheked Match");
+  checkBingo();
+  println("Cheked Bingo");
+  println("Rady for next draw");
 }
 
 void randomNum() {
+  drawnNum = expand(drawnNum, drawnNum.length + 1);  
   while (goodNum == false) {
     int i = 0;
     num = int(random(1, 91));
@@ -68,6 +72,38 @@ void randomNum() {
         break;
       }
       i++;
+    }
+  }
+}
+
+void checkMatch(int n) {
+  for (int i = 0; i < clientData.length - 1; i++) {
+    for (int j = 0; j < 2; j++) {
+      for (int k = 0; k < 8; k++) {
+        if (clientData[i].cData[j][k] == n) {
+          clientData[i].cData[j][k] = 0;
+          break;
+        }
+      }
+    }
+  }
+}
+
+void checkBingo() {
+  for (int i = 0; i < clientData.length - 1; i++) {
+    for (int j = 0; j < 2; j++) {
+      int sum = 0;
+      String row = "";
+      int b = 0;
+      for (int k = 0; k < 8; k++) {
+        sum += clientData[i].cData[j][k];
+        row += clientData[i].cData[j][k] + ",";
+        b++;
+      }
+      if (sum == 0) {
+        println(clientData[i].navn + " har bingo på række: " + j);
+        println("Tal i række: " + row);
+      }
     }
   }
 }
