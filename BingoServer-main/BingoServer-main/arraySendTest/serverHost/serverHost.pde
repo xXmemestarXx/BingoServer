@@ -7,9 +7,8 @@ Client c;
 Client clients[] = new Client[0]; 
 String IP; 
 int[] drawnNum = new int[0];
-boolean keyP = false;
-int num;
 boolean goodNum = false;
+int num;
 
 void setup() {
   size(200, 200);
@@ -55,6 +54,9 @@ void drawNum() {
   println("Cheked Match");
   checkBingo();
   println("Cheked Bingo");
+  for (int i = 0; i < clients.length - 1; i++) {
+    clients[i].write(num);
+  }
   println("Rady for next draw");
 }
 
