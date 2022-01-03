@@ -14,14 +14,18 @@ int num;
 boolean LT = false;
 final int DISPLAY_DURATION = 45; // Den tid tallet vises 10 = 1s
 int timer;
+int boxsize;
+int cols, rows;
 
 
 void setup() {
-  size(200, 200);
+  size(1280, 720);
   surface.setResizable(true);
   surface.setTitle("BingoBango");
   frameRate(10);  
   s = new Server(this, 12345);
+  cols = 18;
+  rows = 5;
 }
 
 void serverEvent(Server someServer, Client someClient) {
@@ -51,6 +55,32 @@ void draw() {
   translate(width/2, height/2);
   GUI();
   popMatrix();
+  translate(width/4.9, height/1.5);
+  tabel();
+}
+void tabel() {
+  int tal = 0;
+  textSize(height/40); 
+  textAlign(CENTER);
+  boxsize = width/30;
+  for (int i = 0; i < cols; i++) {
+    for (int j = 0; j < rows; j++) {
+      int x = i*boxsize;
+      int y = j*boxsize;
+      tal++;
+      fill(255);
+      stroke(0);
+      rect(x, y, boxsize, boxsize);
+      fill(0);
+      for (int o=0; o<drawnNum.length; o++) {
+        if (tal == drawnNum[o]) {
+          text(tal, x + boxsize / 2, y + boxsize / 1.5);
+        } else {
+          text(" ", x + boxsize / 2, y + boxsize / 1.5);
+        }
+      }
+    }
+  }
 }
 
 void GUI() {
