@@ -1,4 +1,22 @@
-import processing.net.*; //<>// //<>// //<>// //<>// //<>// //<>//
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import processing.net.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class serverHost extends PApplet {
+
+ //<>// //<>// //<>// //<>// //<>// //<>//
 
 CBP[] clientData = new CBP[0];
 Server s;
@@ -10,21 +28,21 @@ int[] drawnNum = new int[0];
 boolean goodNum = false;
 int num;
 
-void setup() {
-  size(200, 200);
+public void setup() {
+  
   background(0);
   frameRate(10);  
   s = new Server(this, 12345);
 }
 
-void serverEvent(Server someServer, Client someClient) {
+public void serverEvent(Server someServer, Client someClient) {
   println("New client connected: " + someClient.ip()); 
   clients = (Client[]) expand(clients, clients.length + 1);
   clients[clients.length - 1] = someClient;
   clients[clients.length - 1].write("CONNECTED");
 }
 
-void draw() {
+public void draw() {
   c = s.available();
   if (c != null) {
     stringInput();
@@ -39,14 +57,14 @@ void draw() {
   }
 }
 
-void stringInput() {
+public void stringInput() {
   input = clients[clients.length - 1].readString();
   println(input + " ");
   clientData = (CBP[]) expand(clientData, clientData.length + 1);
   clientData[clientData.length - 1] = new CBP(input);
 }
 
-void drawNum() {
+public void drawNum() {
   randomNum();
   println(drawnNum.length + " : good num = " + num);
   goodNum = false;
@@ -60,11 +78,11 @@ void drawNum() {
   println("Rady for next draw");
 }
 
-void randomNum() {
+public void randomNum() {
   drawnNum = expand(drawnNum, drawnNum.length + 1);  
   while (goodNum == false) {
     int i = 0;
-    num = int(random(1, 91));
+    num = PApplet.parseInt(random(1, 91));
     while (i <= drawnNum.length-1) {
       if (num == drawnNum[i]) {
         break;
@@ -78,8 +96,9 @@ void randomNum() {
   }
 }
 
-void checkMatch(int n) {
+public void checkMatch(int n) {
   for (int i = 0; i < clientData.length; i++) {
+    println(clientData[i].navn + ": ");
     for (int j = 0; j < 3; j++) {
       for (int k = 0; k < 9; k++) {
         if (clientData[i].cData[k][j] == n) {
@@ -93,7 +112,7 @@ void checkMatch(int n) {
   } 
 }
 
-void checkBingo() {
+public void checkBingo() {
   for (int i = 0; i < clientData.length; i++) {
     for (int j = 0; j < 3; j++) {
       int sum = 0;
@@ -103,9 +122,38 @@ void checkBingo() {
         row += clientData[i].cData[k][j] + ",";
       }
       if (sum == 0) {
-        println(clientData[i].navn + " har bingo pa rekke: " + j);
-        println("Tal i rekke: " + row);
+        println(clientData[i].navn + " har bingo på række: " + j);
+        println("Tal i række: " + row);
       }
+    }
+  }
+}
+class CBP{
+  String navn;
+  int[][] cData = new int[9][3];
+  String bingoNum;
+  
+
+
+  CBP(String data) {
+    int k = 1;
+    String[] del = split(data, ',');
+    navn = del[0];
+    for (int i = 0; i < 9; i++) {
+      for (int j = 0; j < 3; j++) {
+        cData[i][j] = PApplet.parseInt(del[k]);
+        k++;
+      }
+    }
+  }
+}
+  public void settings() {  size(200, 200); }
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "serverHost" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
     }
   }
 }
