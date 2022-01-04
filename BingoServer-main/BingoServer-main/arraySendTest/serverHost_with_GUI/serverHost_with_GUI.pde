@@ -23,7 +23,7 @@ void setup() {
   surface.setResizable(true);
   surface.setTitle("BingoBango");
   frameRate(10);  
-  s = new Server(this, 12345);
+  s = new Server(this, 42069);
   cols = 18;
   rows = 5;
 }
@@ -134,7 +134,7 @@ void drawNum() {
   for (int i = 0; i < clients.length - 1; i++) {
     clients[i].write(num);
   }
-  println("Rady for next draw");
+  println("Ready for next draw");
 }
 
 void randomNum() {
