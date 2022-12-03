@@ -8,7 +8,7 @@ void setup() {
   size(200, 200);
   background(0);
   frameRate(10);
-  c = new Client(this, "10.130.152.195", 12345);
+  c = new Client(this, "192.168.87.178", 12345);
 }
 
 void draw() {
@@ -16,4 +16,5 @@ void draw() {
     input = c.readString();
     println(input);
   }
+  c.write("Nigga");
 }
